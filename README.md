@@ -1,4 +1,21 @@
 # Statelayout
+A flexible, easy to use, all in one state layout library.
+
+## Setup
+### Using Gradle
+```gradle
+compile 'com.whitecloak.statelayout:statelayout:0.1.1@aar'
+```
+### Using Maven
+```xml
+<dependency>
+  <groupId>com.whitecloak.statelayout</groupId>
+  <artifactId>statelayout</artifactId>
+  <version>0.1.1</version>
+  <type>pom</type>
+</dependency>
+```
+
 
 ## How to use
 ### Using XML
