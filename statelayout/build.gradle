@@ -13,6 +13,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -22,7 +23,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support:appcompat-v7:26.0.2'
 
     testCompile 'junit:junit:4.12'
 
@@ -30,3 +31,33 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 }
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'statelayout'
+
+    publishedGroupId = 'com.whitecloak.statelayout'
+    libraryName = 'statelayout'
+    artifact = 'statelayout'
+
+    libraryDescription = 'A flexible, easy to use, all in one state layout library'
+
+    siteUrl = 'https://github.com/whitecloakph/statelayout'
+    gitUrl = 'https://github.com/whitecloakph/statelayout.git'
+
+    libraryVersion = '0.1.0'
+
+    developerId = 'whitecloak'
+    developerName = 'White Cloak Technologies, Inc'
+    developerEmail = 'dev@whitecloak.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+
+    // Fix missing githubRepository issue
+    githubRepository = 'whitecloakph/statelayout'
+}
+
+apply from: 'https://raw.githubusercontent.com/nisrulz/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nisrulz/JCenter/master/bintrayv1.gradle'
