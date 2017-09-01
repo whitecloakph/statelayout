@@ -11,7 +11,7 @@ publish {
 
     groupId = 'com.whitecloak.statelayout'
     artifactId = 'statelayout'
-    publishVersion = '0.1.0'
+    publishVersion = '0.1.1'
 
     desc = 'A flexible, easy to use, all in one state layout library'
     website = 'https://github.com/whitecloakph/statelayout'
