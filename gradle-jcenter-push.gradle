@@ -1,0 +1,18 @@
+apply plugin: 'com.novoda.bintray-release'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+publish {
+    bintrayUser = properties.getProperty('bintray.user')
+    bintrayKey = properties.getProperty('bintray.apikey')
+
+    userOrg = 'whitecloak'
+
+    groupId = 'com.whitecloak.statelayout'
+    artifactId = 'statelayout'
+    publishVersion = '0.1.0'
+
+    desc = 'A flexible, easy to use, all in one state layout library'
+    website = 'https://github.com/whitecloakph/statelayout'
+}
