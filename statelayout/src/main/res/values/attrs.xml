@@ -1,0 +1,22 @@
+<resources>
+
+    <declare-styleable name="StateLayout">
+        <attr name="initialState" format="enum">
+            <enum name="content" value="0"/>
+            <enum name="loading" value="1"/>
+            <enum name="error" value="2"/>
+            <enum name="empty" value="3"/>
+        </attr>
+
+        <attr name="contentView" format="reference"/>
+        <attr name="loadingView" format="reference"/>
+        <attr name="errorView" format="reference"/>
+        <attr name="emptyView" format="reference"/>
+
+        <attr name="contentLayout" format="reference"/>
+        <attr name="loadingLayout" format="reference"/>
+        <attr name="errorLayout" format="reference"/>
+        <attr name="emptyLayout" format="reference"/>
+    </declare-styleable>
+
+</resources>
