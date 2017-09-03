@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public class StateLayout extends FrameLayout {
+public class StateLayout extends FrameLayout implements View.OnClickListener {
 
     @IntDef({VIEW_CONTENT, VIEW_LOADING, VIEW_ERROR, VIEW_EMPTY, VIEW_NOTHING})
     @Retention(RetentionPolicy.SOURCE)
@@ -48,7 +48,8 @@ public class StateLayout extends FrameLayout {
     private int mErrorLayoutRes;
     private int mEmptyLayoutRes;
 
-    private RefreshListener mRefreshListener;
+    private ActionListener mErrorListener;
+    private ActionListener mEmptyListener;
 
     public StateLayout(Context context) {
         this(context, null);
@@ -81,17 +82,6 @@ public class StateLayout extends FrameLayout {
         } finally {
             a.recycle();
         }
-
-        setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mViewState == VIEW_EMPTY || mViewState == VIEW_ERROR || mViewState == VIEW_NOTHING) {
-                    if (mRefreshListener != null) {
-                        mRefreshListener.onRefresh();
-                    }
-                }
-            }
-        });
     }
 
     @Override
@@ -104,9 +94,6 @@ public class StateLayout extends FrameLayout {
         mEmptyView = addView(mEmptyViewIdRes, mEmptyLayoutRes, R.layout.view_empty);
 
         setState(mDefaultState);
-
-        showError2(false);
-        showEmpty2(false);
     }
 
     private View addView(@IdRes int idRes, @LayoutRes int layoutRes, @LayoutRes int defLayoutRes) {
@@ -131,6 +118,19 @@ public class StateLayout extends FrameLayout {
         }
     }
 
+    /* View.OnClickListener */
+
+    @Override
+    public void onClick(View view) {
+        if (mEmptyListener != null && mViewState == VIEW_EMPTY) {
+            mEmptyListener.onAction();
+        }
+
+        if (mErrorListener != null && mViewState == VIEW_ERROR) {
+            mErrorListener.onAction();
+        }
+    }
+
     @SuppressWarnings("unused")
     public int getState() {
         return mViewState;
@@ -147,6 +147,12 @@ public class StateLayout extends FrameLayout {
         showView(mLoadingView, state == VIEW_LOADING);
         showView(mErrorView, state == VIEW_ERROR);
         showView(mEmptyView, state == VIEW_EMPTY);
+
+        if (mViewState == VIEW_ERROR || mViewState == VIEW_EMPTY) {
+            setOnClickListener(this);
+        } else {
+            setOnClickListener(null);
+        }
     }
 
     public void showContent() {
@@ -177,13 +183,6 @@ public class StateLayout extends FrameLayout {
         }
     }
 
-    public void showEmpty2(boolean show) {
-        TextView textView = findViewById(R.id.text_empty2);
-        if (textView != null) {
-            textView.setVisibility(show ? View.VISIBLE : View.GONE);
-        }
-    }
-
     public void showError(@NonNull String message) {
         showError();
         TextView textView = findViewById(R.id.text_error);
@@ -192,21 +191,21 @@ public class StateLayout extends FrameLayout {
         }
     }
 
-    public void showError2(boolean show) {
-        TextView textView = findViewById(R.id.text_error2);
-        if (textView != null) {
-            textView.setVisibility(show ? View.VISIBLE : View.GONE);
-        }
+    public void setErrorListener(@Nullable ActionListener listener) {
+        mErrorListener = listener;
     }
 
-    public void setRefreshListener(@Nullable RefreshListener refreshListener) {
-        mRefreshListener = refreshListener;
-        showEmpty2(true);
-        showError2(true);
+    public void setEmptyListener(@Nullable ActionListener listener) {
+        mEmptyListener = listener;
     }
 
-    public interface RefreshListener {
+    public void setErrorEmptyListener(@Nullable ActionListener listener) {
+        mErrorListener = listener;
+        mEmptyListener = listener;
+    }
 
-        void onRefresh();
+    public interface ActionListener {
+
+        void onAction();
     }
 }

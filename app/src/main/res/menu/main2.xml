@@ -19,16 +19,8 @@
         android:title="Error"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_state_error2"
-        android:title="Error w/ Message"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/action_state_empty"
         android:title="Empty"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_state_empty2"
-        android:title="Error w/ Message"
         app:showAsAction="never" />
 
 </menu>

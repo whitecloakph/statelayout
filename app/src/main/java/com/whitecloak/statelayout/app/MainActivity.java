@@ -74,20 +74,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             stateLayout.showContent();
             return true;
         } else if (id == R.id.action_state_error) {
-            stateLayout.showError2(false);
-            stateLayout.showError("Sorry, something wen't wrong");
-            return true;
-        } else if (id == R.id.action_state_error2) {
-            stateLayout.showError2(true);
             stateLayout.showError("Sorry, something wen't wrong");
             return true;
         } else if (id == R.id.action_state_empty) {
-            stateLayout.showEmpty2(false);
             stateLayout.showEmpty("No content found");
             return true;
-        } else if (id == R.id.action_state_empty2) {
-            stateLayout.showEmpty2(true);
-            stateLayout.showEmpty("No content found");
         }
 
         return super.onOptionsItemSelected(item);
