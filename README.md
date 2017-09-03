@@ -16,6 +16,12 @@ compile 'com.whitecloak.statelayout:statelayout:0.1.1@aar'
 </dependency>
 ```
 
+## A quick overview:
+- Loading / Content / Error / Empty
+- Error / Empty Click Listener
+- Define custom layout
+- Define custom view by id
+- More to come...
 
 ## How to use
 ### Using XML
@@ -34,6 +40,74 @@ compile 'com.whitecloak.statelayout:statelayout:0.1.1@aar'
         android:layout_height="match_parent" />
 
 </com.whitecloak.statelayout.StateLayout>
+```
+
+### Switching State
+#### Set state to nothing
+```java
+mStateLayout.showNothing();
+```
+
+#### Set state to loading
+```java
+mStateLayout.showLoading();
+```
+
+
+#### Set state to content
+```java
+mStateLayout.showContent();
+```
+
+#### Set state to error
+```java
+mStateLayout.showError();
+```
+
+#### Set state to error with message
+```java
+mStateLayout.showError("Something wen't wrong");
+```
+
+#### Set state to empty
+```java
+mStateLayout.showEmpty();
+```
+
+#### Set state to empty with error
+```java
+mStateLayout.showEmpty("No content found");
+```
+
+### Listeners
+Add action/click listener when state is empty or error
+
+#### Set error listener
+```java
+stateLayout.setErrorListener(new StateLayout.ActionListener() {
+    @Override
+    public void onAction() {
+        // DO SOMETHING
+    }
+});
+```
+#### Set empty listener
+```java
+stateLayout.setEmptyListener(new StateLayout.ActionListener() {
+    @Override
+    public void onAction() {
+        // DO SOMETHING
+    }
+});
+```
+#### Set Error or Empty listener
+```java
+stateLayout.setErrorEmptyListener(new StateLayout.ActionListener() {
+    @Override
+    public void onAction() {
+        // DO SOMETHING
+    }
+});
 ```
 
 # License
