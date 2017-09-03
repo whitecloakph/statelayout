@@ -11,7 +11,7 @@ compile 'com.whitecloak.statelayout:statelayout:0.1.1@aar'
 <dependency>
   <groupId>com.whitecloak.statelayout</groupId>
   <artifactId>statelayout</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.3</version>
   <type>pom</type>
 </dependency>
 ```
