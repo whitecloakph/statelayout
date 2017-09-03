@@ -8,8 +8,8 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -115,13 +115,11 @@ public class StateLayout extends FrameLayout {
         if (idRes > 0) {
             view = findViewById(idRes);
         } else if (layoutRes > 0) {
-            view = inflate(getContext(), layoutRes, null);
+            view = LayoutInflater.from(getContext()).inflate(layoutRes, this, false);
             addView(view);
         } else {
-            view = inflate(getContext(), defLayoutRes, null);
-            addView(view, new LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
+            view = LayoutInflater.from(getContext()).inflate(defLayoutRes, this, false);
+            addView(view);
         }
 
         return view;
@@ -173,14 +171,14 @@ public class StateLayout extends FrameLayout {
 
     public void showEmpty(@NonNull String message) {
         showEmpty();
-        TextView textView = (TextView) findViewById(R.id.text_empty);
+        TextView textView = findViewById(R.id.text_empty);
         if (textView != null) {
             textView.setText(message);
         }
     }
 
     public void showEmpty2(boolean show) {
-        TextView textView = (TextView) findViewById(R.id.text_empty2);
+        TextView textView = findViewById(R.id.text_empty2);
         if (textView != null) {
             textView.setVisibility(show ? View.VISIBLE : View.GONE);
         }
@@ -188,14 +186,14 @@ public class StateLayout extends FrameLayout {
 
     public void showError(@NonNull String message) {
         showError();
-        TextView textView = (TextView) findViewById(R.id.text_error);
+        TextView textView = findViewById(R.id.text_error);
         if (textView != null) {
             textView.setText(message);
         }
     }
 
     public void showError2(boolean show) {
-        TextView textView = (TextView) findViewById(R.id.text_error2);
+        TextView textView = findViewById(R.id.text_error2);
         if (textView != null) {
             textView.setVisibility(show ? View.VISIBLE : View.GONE);
         }
